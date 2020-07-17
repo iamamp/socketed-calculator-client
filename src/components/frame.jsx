@@ -88,6 +88,7 @@ class Frame extends React.Component {
                 <div>
                     Open as many tabs to this link as you want and see the magic!
                 </div>
+                <div>You are logged in as {this.state.userName}</div>
                 <br></br>
                 <Screen question={this.state.question} answer={this.state.answer} />
                 <div className="button-row">
