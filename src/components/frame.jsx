@@ -15,6 +15,8 @@ const style = {
      justifyContent: 'center'
 }
 
+
+
 function DisplayLogs(props) {
     var date = new Date();
     console.log('inside display, props is ',props);
@@ -34,7 +36,7 @@ class Frame extends React.Component {
         this.state = {
             question: '0',
             answer: '0',
-            //userName: '',
+            userName: '',
             logs: [],
             numbers: [1, 2, 3, 4, 5]
         }
@@ -50,16 +52,27 @@ class Frame extends React.Component {
             console.log('WebSocket Client Connected');
         };
         client.onmessage = (message) => {
+            console.log(message.data);
+            
             const dataFromServer = JSON.parse(message.data);
-            //console.log('got reply! ', dataFromServer);
-            console.log('got reply! ', dataFromServer.msg);
-            console.log('this.state.logs before push: ',this.state.logs);
-            var logsNew = this.state.logs;
-            logsNew.push(dataFromServer.msg);
-            console.log('logsnew is ',logsNew);
-            if (logsNew.length > 10) logsNew = logsNew.slice(-10);
-            this.setState({logs: logsNew});
-            console.log(this.state.logs)
+            console.log('got reply! ', dataFromServer);
+            
+
+            if(dataFromServer.hasOwnProperty('msg')){
+                console.log('got reply! ', dataFromServer.msg);
+                console.log('this.state.logs before push: ',this.state.logs);
+                var logsNew = this.state.logs;
+                logsNew.push(dataFromServer.msg);
+                console.log('logsnew is ',logsNew);
+                if (logsNew.length > 10) logsNew = logsNew.slice(-10);
+                this.setState({logs: logsNew});
+                console.log(this.state.logs)    
+            }
+            else {
+                console.log('received userID! ', message.data);  
+                this.setState({userName: JSON.parse(message.data).id});
+            }
+            
         };
 
         
@@ -70,7 +83,7 @@ class Frame extends React.Component {
         return (
             <div className="frame" style={style}>
                 <h2 className="calculator-title">
-                    Ashish's very computer-scientific calculator!
+                    ** WS calculator **
                 </h2>
                 <div>
                     Open as many tabs to this link as you want and see the magic!
@@ -130,8 +143,8 @@ class Frame extends React.Component {
                 
                 var mObj = JSON.stringify({
                     type: "message",
-                    msg: this.state.question+' = '+answer,
-                    user:  this.state.userName
+                    msg: 'user <'+this.state.userName+'> performed '+this.state.question+' = '+answer,
+                    //user:  this.state.userName
                   })
 
                 client.send(mObj);
