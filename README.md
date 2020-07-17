@@ -11,7 +11,8 @@ For example, user A and user B go to your site at the same time. User A calculat
 
 Results should remain between sessions. Only show the last 10 calculations descending from most recent to oldest.
 
-NOTE: On Heroku's free tier, idling will cause change of state from up to down.
+65k connections per port are possible using WebSockets.
+This app can be scaled further by adding mutiple servers, a DB, a load balancer etc.
 
 Give it a shot at
 https://socketed-calculator-client.herokuapp.com/
