@@ -4,7 +4,7 @@ import Button from './button';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 
 //const client = new W3CWebSocket('ws://localhost:8000'); //the server you talk to
-const client = new W3CWebSocket('wss://socketed-calculator.vercel.app/:8000'); //the server you talk to
+const client = new W3CWebSocket('wss://socketed-calculator-master-94ctct1cs-iamamps-projects.vercel.app/:8000'); //the server you talk to
 
 
 const style = {
