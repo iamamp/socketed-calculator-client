@@ -2,9 +2,18 @@ import React from 'react';
 import Screen from './screen';
 import Button from './button';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
+//import WebSocket from 'ws';
 
 //const client = new W3CWebSocket('ws://localhost:8000'); //the server you talk to
-const client = new W3CWebSocket('wss://socketed-calculator-master-94ctct1cs-iamamps-projects.vercel.app/:8000'); //the server you talk to
+// const client = new W3CWebSocket('ws://localhost:8000', {
+//     headers: {
+//         "user-agent": "some client"
+//     }
+// }); //the server you talk to
+
+//const client = new WebSocket('ws://localhost:8000'); //the server you talk to
+//const client = new WebSocket('wss://socketed-calculator.glitch.me:8000'); //the server you talk to
+const client = new WebSocket('wss://socketed-calculator.glitch.me'); //the server you talk to
 
 
 const style = {
